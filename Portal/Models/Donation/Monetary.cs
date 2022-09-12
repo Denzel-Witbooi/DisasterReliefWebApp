@@ -16,6 +16,7 @@ namespace Portal.Models.Donation
         [Column(TypeName = "money")]
         public decimal DonationAmount { get; set; }
 
+        [DisplayFormat(NullDisplayText = "anonymous")]
         public string DonorName { get; set; }
 
     }

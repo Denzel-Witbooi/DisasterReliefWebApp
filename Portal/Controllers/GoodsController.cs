@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,7 @@ namespace Portal.Controllers
         }
 
         // GET: Goods/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name");
@@ -62,6 +64,7 @@ namespace Portal.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GoodID,DonationDate,NumberOfItems,Description,DonorName,CategoryID,DisasterID")] Good good)
         {
@@ -77,6 +80,7 @@ namespace Portal.Controllers
         }
 
         // GET: Goods/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,8 +93,8 @@ namespace Portal.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", good.CategoryID);
-            ViewData["DisasterID"] = new SelectList(_context.Disasters, "DisasterID", "Description", good.DisasterID);
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name", good.CategoryID);
+            ViewData["DisasterID"] = new SelectList(_context.Disasters, "DisasterID", "DisasterID", good.DisasterID);
             return View(good);
         }
 
@@ -98,6 +102,7 @@ namespace Portal.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GoodID,DonationDate,NumberOfItems,Description,DonorName,CategoryID,DisasterID")] Good good)
         {
@@ -127,11 +132,12 @@ namespace Portal.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", good.CategoryID);
-            ViewData["DisasterID"] = new SelectList(_context.Disasters, "DisasterID", "Description", good.DisasterID);
+            ViewData["DisasterID"] = new SelectList(_context.Disasters, "DisasterID", "DisasterID", good.DisasterID);
             return View(good);
         }
 
         // GET: Goods/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

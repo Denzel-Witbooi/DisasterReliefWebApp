@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace Portal.Controllers
         }
 
         // GET: Disasters/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -66,6 +68,7 @@ namespace Portal.Controllers
         }
 
         // GET: Disasters/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -75,6 +78,7 @@ namespace Portal.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind("StartDate,EndDate,Description,Location")] Disaster disaster)
@@ -99,6 +103,7 @@ namespace Portal.Controllers
         }
 
         // GET: Disasters/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,6 +123,7 @@ namespace Portal.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DisasterID,StartDate,EndDate,Description,Location")] Disaster disaster)
         {
@@ -150,6 +156,7 @@ namespace Portal.Controllers
         }
 
         // GET: Disasters/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -176,6 +183,7 @@ namespace Portal.Controllers
 
         // POST: Disasters/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
