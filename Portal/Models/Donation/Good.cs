@@ -16,6 +16,7 @@ namespace Portal.Models.Donation
         public string Description { get; set; }
 
         [DisplayFormat(NullDisplayText = "anonymous")]
+        [Display(Name = "Donor Name")]
         public string DonorName { get; set; }
 
         public int CategoryID { get; set; }

@@ -14,9 +14,11 @@ namespace Portal.Models.Donation
 
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
+        [Display(Name = "Donation Amount")]
         public decimal DonationAmount { get; set; }
 
         [DisplayFormat(NullDisplayText = "anonymous")]
+        [Display(Name = "Donor Name")]
         public string DonorName { get; set; }
 
     }
