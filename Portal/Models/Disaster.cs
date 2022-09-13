@@ -25,6 +25,10 @@ namespace Portal.Models
         [Required]
         public string Location { get; set; }
 
+        public int AidTypeID { get; set; }
+
+        public AidType AidType { get; set; }
+
         public ICollection<Good> Goods { get; set; }
     }
 }

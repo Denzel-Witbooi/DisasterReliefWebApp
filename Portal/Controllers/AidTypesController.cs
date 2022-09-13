@@ -11,23 +11,22 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
-    public class DisastersController : Controller
+    public class AidTypesController : Controller
     {
         private readonly DisasterReliefContext _context;
 
-        public DisastersController(DisasterReliefContext context)
+        public AidTypesController(DisasterReliefContext context)
         {
             _context = context;
         }
 
-        // GET: Disasters
+        // GET: AidTypes
         public async Task<IActionResult> Index()
         {
-            var disasterReliefContext = _context.Disasters.Include(d => d.AidType);
-            return View(await disasterReliefContext.ToListAsync());
+            return View(await _context.AidTypes.ToListAsync());
         }
 
-        // GET: Disasters/Details/5
+        // GET: AidTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,44 +34,41 @@ namespace Portal.Controllers
                 return NotFound();
             }
 
-            var disaster = await _context.Disasters
-                .Include(d => d.AidType)
-                .FirstOrDefaultAsync(m => m.DisasterID == id);
-            if (disaster == null)
+            var aidType = await _context.AidTypes
+                .FirstOrDefaultAsync(m => m.AidTypeID == id);
+            if (aidType == null)
             {
                 return NotFound();
             }
 
-            return View(disaster);
+            return View(aidType);
         }
 
-        // GET: Disasters/Create
+        // GET: AidTypes/Create
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["AidTypeID"] = new SelectList(_context.AidTypes, "AidTypeID", "Name");
             return View();
         }
 
-        // POST: Disasters/Create
+        // POST: AidTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DisasterID,StartDate,EndDate,Description,Location,AidTypeID")] Disaster disaster)
+        public async Task<IActionResult> Create([Bind("AidTypeID,Name")] AidType aidType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(disaster);
+                _context.Add(aidType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AidTypeID"] = new SelectList(_context.AidTypes, "AidTypeID", "Name", disaster.AidTypeID);
-            return View(disaster);
+            return View(aidType);
         }
 
-        // GET: Disasters/Edit/5
+        // GET: AidTypes/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,24 +77,23 @@ namespace Portal.Controllers
                 return NotFound();
             }
 
-            var disaster = await _context.Disasters.FindAsync(id);
-            if (disaster == null)
+            var aidType = await _context.AidTypes.FindAsync(id);
+            if (aidType == null)
             {
                 return NotFound();
             }
-            ViewData["AidTypeID"] = new SelectList(_context.AidTypes, "AidTypeID", "Name", disaster.AidTypeID);
-            return View(disaster);
+            return View(aidType);
         }
 
-        // POST: Disasters/Edit/5
+        // POST: AidTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DisasterID,StartDate,EndDate,Description,Location,AidTypeID")] Disaster disaster)
+        public async Task<IActionResult> Edit(int id, [Bind("AidTypeID,Name")] AidType aidType)
         {
-            if (id != disaster.DisasterID)
+            if (id != aidType.AidTypeID)
             {
                 return NotFound();
             }
@@ -107,12 +102,12 @@ namespace Portal.Controllers
             {
                 try
                 {
-                    _context.Update(disaster);
+                    _context.Update(aidType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DisasterExists(disaster.DisasterID))
+                    if (!AidTypeExists(aidType.AidTypeID))
                     {
                         return NotFound();
                     }
@@ -123,11 +118,10 @@ namespace Portal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AidTypeID"] = new SelectList(_context.AidTypes, "AidTypeID", "Name", disaster.AidTypeID);
-            return View(disaster);
+            return View(aidType);
         }
 
-        // GET: Disasters/Delete/5
+        // GET: AidTypes/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -136,32 +130,31 @@ namespace Portal.Controllers
                 return NotFound();
             }
 
-            var disaster = await _context.Disasters
-                .Include(d => d.AidType)
-                .FirstOrDefaultAsync(m => m.DisasterID == id);
-            if (disaster == null)
+            var aidType = await _context.AidTypes
+                .FirstOrDefaultAsync(m => m.AidTypeID == id);
+            if (aidType == null)
             {
                 return NotFound();
             }
 
-            return View(disaster);
+            return View(aidType);
         }
 
-        // POST: Disasters/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: AidTypes/Delete/5
         [Authorize]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var disaster = await _context.Disasters.FindAsync(id);
-            _context.Disasters.Remove(disaster);
+            var aidType = await _context.AidTypes.FindAsync(id);
+            _context.AidTypes.Remove(aidType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DisasterExists(int id)
+        private bool AidTypeExists(int id)
         {
-            return _context.Disasters.Any(e => e.DisasterID == id);
+            return _context.AidTypes.Any(e => e.AidTypeID == id);
         }
     }
 }

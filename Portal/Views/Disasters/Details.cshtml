@@ -6,8 +6,6 @@
 
 <h1>Details</h1>
 
-<h4>Disaster</h4>
-
 <div>
     <h4>Disaster</h4>
     <hr />
@@ -35,6 +33,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AidType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AidType.Name)
         </dd>
     </dl>
 </div>

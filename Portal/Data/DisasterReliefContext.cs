@@ -14,6 +14,7 @@ namespace Portal.Data
         public DbSet<Good> Goods { get; set; }
         public DbSet<Disaster> Disasters { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<AidType> AidTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,7 @@ namespace Portal.Data
             modelBuilder.Entity<Good>().ToTable("Good");
             modelBuilder.Entity<Disaster>().ToTable("Disaster");
             modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<AidType>().ToTable("AidType");
         }
     }
 }

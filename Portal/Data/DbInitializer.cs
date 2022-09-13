@@ -49,14 +49,31 @@ namespace Portal.Data
             }
 
             context.SaveChanges();
-            #endregion         
+            #endregion
+
+            #region AidTypes
+            var aidtypes = new AidType[]
+            {
+                new AidType{ Name = "Water Provision"},
+                new AidType{ Name = "Clothing"},
+                new AidType{ Name = "Food"}
+            };
+
+            foreach (AidType aidtype in aidtypes)
+            {
+                context.AidTypes.Add(aidtype);
+            }
+
+            context.SaveChanges();
+            #endregion
+
             #region Disaster 
             var disasters = new Disaster[]
    {
-                new Disaster{StartDate=DateTime.Parse("2022-01-01"), EndDate=DateTime.Parse("2022-01-12"),
+                new Disaster{AidTypeID = 1, StartDate=DateTime.Parse("2022-01-01"), EndDate=DateTime.Parse("2022-01-12"),
                         Description="Explosion of buried nuclear waste from a plutonium-processing plant near Kyshtym",
-                        Location=" Chelyabinsk, Russia, Soviet Union"},
-                new Disaster{StartDate=DateTime.Parse("2022-10-01"), EndDate=DateTime.Parse("2022-10-10"),
+                        Location=" Chelyabinsk, Russia, Soviet Union" },
+                new Disaster{AidTypeID = 2, StartDate=DateTime.Parse("2022-10-01"), EndDate=DateTime.Parse("2022-10-10"),
                         Description="The capsizing of an Italian cruise ship on January 13, 2012, after it struck rocks off the coast of Giglio Island in the Tyrrhenian Sea.",
                         Location="Giglio Island, Italy, Mediterranean Sea Tyrrhenian Sea"}
    };
@@ -87,6 +104,7 @@ namespace Portal.Data
 
             context.SaveChanges();
             #endregion
+
         }
     }
 }
