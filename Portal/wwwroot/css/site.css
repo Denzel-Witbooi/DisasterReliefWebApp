@@ -20,8 +20,8 @@ a {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #c25b1b;
-    border-color: #ac6718;
+    background-color: #ff9800;
+    border-color: #f57c00;
 }
 
 /* Sticky footer styles
