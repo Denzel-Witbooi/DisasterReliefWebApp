@@ -19,8 +19,14 @@ Simple ERD to map out my model structure and relationships
 
 
 ## References
+```
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-6.0
+```
+```
 https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction
+```
 
 ## How to seed data to database on startup
+```
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0#initialize-db-with-test-data
+```
