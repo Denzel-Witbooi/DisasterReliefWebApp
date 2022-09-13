@@ -25,3 +25,4 @@ https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-win
 ```
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0#initialize-db-with-test-data
 ```
+### ERD made with draw.io 
