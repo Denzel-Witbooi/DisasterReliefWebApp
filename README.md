@@ -13,15 +13,15 @@ Simple ERD to map out my model structure and relationships
 
 ## References
 
-## How to setup an asp.net core 5 MVC web project + EF Core
+### How to setup an asp.net core 5 MVC web project + EF Core
 ```
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-6.0
 ```
-## How to setup web project on azure portal
+### How to setup web project on azure portal
 ```
 https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction
 ```
-## How to seed data to database on startup
+### How to seed data to database on startup
 ```
 https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0#initialize-db-with-test-data
 ```
