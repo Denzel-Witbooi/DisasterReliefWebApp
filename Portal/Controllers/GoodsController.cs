@@ -21,6 +21,7 @@ namespace Portal.Controllers
         }
 
         // GET: Goods
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var goods = _context.Goods.

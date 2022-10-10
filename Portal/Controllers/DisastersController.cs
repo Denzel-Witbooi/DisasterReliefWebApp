@@ -21,6 +21,7 @@ namespace Portal.Controllers
         }
 
         // GET: Disasters
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var disasterReliefContext = _context.Disasters.Include(d => d.AidType);
