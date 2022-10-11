@@ -41,7 +41,7 @@ namespace Portal.Controllers
             return View(await disasterReliefContext.ToListAsync());
         }
 
-        public async void updateTotal()
+        public void updateTotal()
         {
             totalDonation = _context.Monetaries
            .Sum(m => m.DonationAmount);
@@ -49,6 +49,18 @@ namespace Portal.Controllers
             purchased = _context.GoodsPurchases.Sum(i => i.purchaseAmount);
 
             balanceRemaining = totalDonation - purchased;
+
+            ViewBag.totalDonation = balanceRemaining.ToString("C0");
+        }
+
+        public void IncreaseTotal()
+        {
+            totalDonation = _context.Monetaries
+           .Sum(m => m.DonationAmount);
+
+            purchased = _context.GoodsPurchases.Sum(i => i.purchaseAmount);
+
+            balanceRemaining = totalDonation + purchased;
 
             ViewBag.totalDonation = balanceRemaining.ToString("C0");
         }
@@ -174,6 +186,8 @@ namespace Portal.Controllers
                 .Include(g => g.Disaster)
                 .Include(g => g.Monetary)
                 .FirstOrDefaultAsync(m => m.GoodsPurchaseId == id);
+            IncreaseTotal();
+
             if (goodsPurchase == null)
             {
                 return NotFound();
@@ -190,6 +204,7 @@ namespace Portal.Controllers
         {
             var goodsPurchase = await _context.GoodsPurchases.FindAsync(id);
             _context.GoodsPurchases.Remove(goodsPurchase);
+            IncreaseTotal();
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
