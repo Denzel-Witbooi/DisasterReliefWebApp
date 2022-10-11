@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Portal.Data;
 using Portal.Models;
+using Portal.Models.Donation;
 
 namespace Portal.Controllers
 {
@@ -16,6 +17,8 @@ namespace Portal.Controllers
         private readonly DisasterReliefContext _context;
 
         public decimal totalDonation { get; set; }
+        public decimal purchased { get; set; }
+        public decimal balanceRemaining { get; set; }
 
         public GoodsPurchasesController(DisasterReliefContext context)
         {
@@ -29,12 +32,25 @@ namespace Portal.Controllers
             totalDonation = _context.Monetaries
                .Sum(m => m.DonationAmount);
 
-
+            purchased = _context.GoodsPurchases.Sum(i => i.purchaseAmount);
            
             ViewBag.totalDonation = totalDonation.ToString("C0");
             var disasterReliefContext = _context.GoodsPurchases.Include(g => g.Disaster).Include(g => g.Monetary);
+            updateTotal();
 
             return View(await disasterReliefContext.ToListAsync());
+        }
+
+        public async void updateTotal()
+        {
+            totalDonation = _context.Monetaries
+           .Sum(m => m.DonationAmount);
+
+            purchased = _context.GoodsPurchases.Sum(i => i.purchaseAmount);
+
+            balanceRemaining = totalDonation - purchased;
+
+            ViewBag.totalDonation = balanceRemaining.ToString("C0");
         }
 
         // GET: GoodsPurchases/Details/5
@@ -54,7 +70,7 @@ namespace Portal.Controllers
             {
                 return NotFound();
             }
-
+            updateTotal();
             return View(goodsPurchase);
         }
 
@@ -64,6 +80,7 @@ namespace Portal.Controllers
         {
             ViewData["DisasterId"] = new SelectList(_context.Disasters, "DisasterID", "Description");
             ViewData["MonetaryId"] = new SelectList(_context.Monetaries, "MonetaryID", "MonetaryID");
+            updateTotal();
             return View();
         }
 
@@ -83,6 +100,7 @@ namespace Portal.Controllers
             }
             ViewData["DisasterId"] = new SelectList(_context.Disasters, "DisasterID", "Description", goodsPurchase.DisasterId);
             ViewData["MonetaryId"] = new SelectList(_context.Monetaries, "MonetaryID", "MonetaryID", goodsPurchase.MonetaryId);
+            updateTotal();
             return View(goodsPurchase);
         }
 
