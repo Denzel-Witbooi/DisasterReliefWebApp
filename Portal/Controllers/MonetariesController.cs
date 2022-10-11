@@ -15,19 +15,30 @@ namespace Portal.Controllers
     {
         private readonly DisasterReliefContext _context;
 
+        public decimal totalDonation { get; set; }
         public MonetariesController(DisasterReliefContext context)
         {
             _context = context;
         }
 
+        public decimal getTotalDonation()
+        {
+            totalDonation = _context.Monetaries
+                .Sum(m => m.DonationAmount);
+            return totalDonation;
+        }
         // GET: Monetaries
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            totalDonation = _context.Monetaries
+                .Sum(m => m.DonationAmount);
+            ViewBag.totalDonation = totalDonation.ToString("C0");
             return View(await _context.Monetaries.ToListAsync());
         }
 
         // GET: Monetaries/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
