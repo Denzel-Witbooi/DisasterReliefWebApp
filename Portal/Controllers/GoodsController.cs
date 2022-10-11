@@ -19,9 +19,10 @@ namespace Portal.Controllers
         {
             _context = context;
         }
-        
+
 
         // GET: Goods
+        [Authorize]
         public async Task<IActionResult> Index()
         {
 
@@ -33,6 +34,7 @@ namespace Portal.Controllers
         }
 
         // GET: Goods/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

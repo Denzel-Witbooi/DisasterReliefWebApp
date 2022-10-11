@@ -21,9 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Disaster)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monetary)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,9 +35,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Disaster.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monetary.MonetaryID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.GoodsPurchaseId">Edit</a> |
