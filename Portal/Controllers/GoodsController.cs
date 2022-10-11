@@ -19,10 +19,12 @@ namespace Portal.Controllers
         {
             _context = context;
         }
+        
 
         // GET: Goods
         public async Task<IActionResult> Index()
         {
+
             var goods = _context.Goods.
                 Include(g => g.Category)
                 .Include(g => g.Disaster)

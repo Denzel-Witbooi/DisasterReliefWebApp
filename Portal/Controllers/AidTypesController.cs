@@ -21,12 +21,14 @@ namespace Portal.Controllers
         }
 
         // GET: AidTypes
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.AidTypes.ToListAsync());
         }
 
         // GET: AidTypes/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
