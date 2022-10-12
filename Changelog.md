@@ -1,38 +1,19 @@
-# DisasterRelief
-```
-https://disasterrelief.azurewebsites.net
-```
-### Youtube
-
-```
-https://youtu.be/_D8BRmAMkg0 
-```
-### Azure Auth:
-```
-User: ST10118615
-Password: mPahMWD3gpC7*RC1IFC1
-```
-## ERD
-Simple ERD to map out my model structure and relationships
-![ERD](https://user-images.githubusercontent.com/77748858/190013052-83b7a343-0c0b-422d-8b0c-b47bdfa5a256.png)
-
-## References
-
-### How to setup an asp.net core 5 MVC web project + EF Core
-```
-https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-6.0
-```
-### How to setup web project on azure portal
-```
-https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction
-```
-### How to seed data to database on startup
-```
-https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0#initialize-db-with-test-data
-```
-### ERD made with draw.io 
-
-### Azure Access
-![azure](https://user-images.githubusercontent.com/77748858/190170262-71d15e70-d819-4e7d-8445-369203a5e356.png)
-
-
+# Change Log
+All notable changes to this project will be documented in this file.
+ 
+The format is based on [Keep a Changelog](http://keepachangelog.com/).
+ 
+### Added
+- More work items and storyboards covering work to-do for the whole POE.
+- New Table to Database Goods Purchase to track purchased goods
+- New Page and navbar item for Goods purchased
+- Page auto-generated using MVC 5 EF to have basic CRUD functionality.
+ 
+### Changed
+- Monetaries page has a total amount of money donated.
+- Index page for the goods purchased tracks the increase and decrease
+- in total funds.
+ 
+### Fixed
+- Restricted index page access based on feedback
+- All pages now require user to be logged in to be accessed
