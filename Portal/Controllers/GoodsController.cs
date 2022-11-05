@@ -20,10 +20,12 @@ namespace Portal.Controllers
             _context = context;
         }
 
+
         // GET: Goods
         [Authorize]
         public async Task<IActionResult> Index()
         {
+
             var goods = _context.Goods.
                 Include(g => g.Category)
                 .Include(g => g.Disaster)
@@ -32,6 +34,7 @@ namespace Portal.Controllers
         }
 
         // GET: Goods/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
