@@ -17,6 +17,9 @@ namespace Portal.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly DisasterReliefContext db;
+
+        public decimal totalGoods { get; set; }
+        public decimal totalDonation { get; set; }
         public HomeController(ILogger<HomeController> logger, DisasterReliefContext disasterReliefContext)
         {
             _logger = logger;
@@ -29,13 +32,14 @@ namespace Portal.Controllers
             return View();
         }
 
-        public async Task<ActionResult> About()
+        public async Task<ActionResult> GoodsStats()
         {
+            ViewBag.getTotalGoods = getTotalGoods();
             /*
-             * The LINQ statement groups the student entities 
-             * by enrollment date, calculates the number of entities 
+             * The LINQ statement groups the goods entities 
+             * by donation date, calculates the number of entities 
              * in each group, and stores the results in a 
-             * collection of EnrollmentDateGroup view model objects.
+             * collection of DonationGroup view model objects.
              */
             IQueryable<DonationGroup> data =
                 from good in db.Goods
@@ -48,6 +52,42 @@ namespace Portal.Controllers
                 };
             return View(await data.AsNoTracking().ToListAsync());
         }
+        public decimal getTotalGoods()
+        {
+            totalGoods = db.Goods
+                .Sum(m => m.NumberOfItems);
+            return totalGoods;
+        }
+
+        public decimal getTotalDonation()
+        {
+            totalDonation = db.Monetaries
+                .Sum(m => m.DonationAmount);
+            return totalDonation;
+        }
+        public async Task<ActionResult> MonetaryStats()
+        {
+            ViewBag.totalDonation = getTotalDonation().ToString("C0");
+            /*
+             * The LINQ statement groups the student entities 
+             * by enrollment date, calculates the number of entities 
+             * in each group, and stores the results in a 
+             * collection of EnrollmentDateGroup view model objects.
+             */
+            IQueryable<MonetaryGroup> data =
+                from monetary in db.Monetaries
+                group monetary by monetary.DonationDate into
+                dateGroup
+                select new MonetaryGroup()
+                {
+                    DonationDate = dateGroup.Key,
+                    MonetaryCount = dateGroup.Count()
+                };
+            return View(await data.AsNoTracking().ToListAsync());
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
