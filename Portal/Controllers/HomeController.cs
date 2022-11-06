@@ -20,6 +20,7 @@ namespace Portal.Controllers
 
         public decimal totalGoods { get; set; }
         public decimal totalDonation { get; set; }
+        public decimal totalDisasters { get; set; }
         public HomeController(ILogger<HomeController> logger, DisasterReliefContext disasterReliefContext)
         {
             _logger = logger;
@@ -69,10 +70,10 @@ namespace Portal.Controllers
         {
             ViewBag.totalDonation = getTotalDonation().ToString("C0");
             /*
-             * The LINQ statement groups the student entities 
-             * by enrollment date, calculates the number of entities 
+             * The LINQ statement groups the monetary entities 
+             * by donation date, calculates the number of entities 
              * in each group, and stores the results in a 
-             * collection of EnrollmentDateGroup view model objects.
+             * collection of Monetary view model objects.
              */
             IQueryable<MonetaryGroup> data =
                 from monetary in db.Monetaries
@@ -86,6 +87,33 @@ namespace Portal.Controllers
             return View(await data.AsNoTracking().ToListAsync());
         }
 
+        public decimal getTotalActiveDisasters()
+        {
+            totalDisasters = db.Disasters.Where(x => x.StartDate >= DateTime.Today).Count();
+            return totalDisasters;
+        }
+
+        public async Task<ActionResult> DisasterStats()
+        {
+            ViewBag.totalDisasters = getTotalActiveDisasters();
+            /*
+             * The LINQ statement groups the disaster entities 
+             * by Start date, calculates the number of entities 
+             * in each group, and stores the results in a 
+             * collection of DisasterGroup view model objects.
+             */
+            IQueryable<DisasterGroup> data =
+                from disaster in db.Disasters
+                group disaster by disaster.StartDate into
+                dateGroup
+                select new DisasterGroup()
+                {
+                    Active = DateTime.Today,
+                    ActiveDate = dateGroup.Key,
+                    DisasterCount = dateGroup.Count()
+                };
+            return View(await data.AsNoTracking().ToListAsync());
+        }
 
 
 
