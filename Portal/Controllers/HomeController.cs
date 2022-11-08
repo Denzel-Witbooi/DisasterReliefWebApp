@@ -27,7 +27,6 @@ namespace Portal.Controllers
             db = disasterReliefContext;
         }
 
-
         public IActionResult Index()
         {
             return View();
