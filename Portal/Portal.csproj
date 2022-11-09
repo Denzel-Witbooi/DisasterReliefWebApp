@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ADO\" />
     <Folder Include="Properties\ServiceDependencies\" />
   </ItemGroup>
 
