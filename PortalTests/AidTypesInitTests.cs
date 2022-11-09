@@ -2,19 +2,18 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portal.Data;
-using Portal.Models.Donation;
+using Portal.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PortalTests
 {
     [TestClass]
-    public class MonetaryInitTests
+    public class AidTypesInitTests
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -22,7 +21,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public MonetaryInitTests()
+        public AidTypesInitTests()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -41,21 +40,22 @@ namespace PortalTests
             {
                 context.Database.EnsureCreated();
 
-                var monetaries = new Monetary()
+                var aidtypes = new AidType()
                 {
-                    DonationDate = DateTime.Parse("2022-09-04"),
-                    DonationAmount = 350000,
-                    DonorName = "Nasrin2"
+                    Name = "Water Provision"
                 };
 
-                var monetaries2 = new Monetary()
+                var aidtypes2 = new AidType()
                 {
-                    DonationDate = DateTime.Parse("2022-08-03"),
-                    DonationAmount = 450000,
-                    DonorName = "Stacey2"
+                    Name = "Clothing"
                 };
 
-                context.Monetaries.AddRange(monetaries, monetaries2);
+                var aidtypes3 = new AidType()
+                {
+                    Name = "Food"
+                };
+
+                context.AidTypes.AddRange(aidtypes, aidtypes2,aidtypes3);
                 context.SaveChanges();
             }
         }

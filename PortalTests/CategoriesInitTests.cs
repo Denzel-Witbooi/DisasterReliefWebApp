@@ -2,19 +2,19 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portal.Data;
+using Portal.Models;
 using Portal.Models.Donation;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PortalTests
 {
     [TestClass]
-    public class MonetaryInitTests
+    public class CategoriesInitTests
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -22,7 +22,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public MonetaryInitTests()
+        public CategoriesInitTests()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -41,23 +41,20 @@ namespace PortalTests
             {
                 context.Database.EnsureCreated();
 
-                var monetaries = new Monetary()
+                var categories = new Category()
                 {
-                    DonationDate = DateTime.Parse("2022-09-04"),
-                    DonationAmount = 350000,
-                    DonorName = "Nasrin2"
+                    Name = "Clothes"
                 };
 
-                var monetaries2 = new Monetary()
+                var categories2 = new Category()
                 {
-                    DonationDate = DateTime.Parse("2022-08-03"),
-                    DonationAmount = 450000,
-                    DonorName = "Stacey2"
+                    Name = "Non‐perishable foods"
                 };
-
-                context.Monetaries.AddRange(monetaries, monetaries2);
+                
+                context.Categories.AddRange(categories, categories2);
                 context.SaveChanges();
             }
         }
     }
 }
+
