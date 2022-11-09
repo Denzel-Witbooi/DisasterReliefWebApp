@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Portal.Models.ReliefViewModels.DisasterGroup>
+﻿@model IEnumerable<Portal.Models.ReliefViewModels.DisasterGoodsInfo>
 
 @{
     ViewBag.Title = "Disaster Relief Statistics";
@@ -7,24 +7,38 @@
 <h1>Disaster Relief Statistics - Disasters </h1>
 <h3>Total active today: @ViewBag.totalDisasters</h3>
 
-<table>
+<table class="table">
+    <thead>
     <tr>
         <th>
             Start Date
         </th>
         <th>
-            Found
+            Description
+        </th>
+        <th>
+            Goods Assigned
+        </th>
+        <th>
+            Funds
         </th>
     </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ActiveDate)  
+                @Html.DisplayFor(modelItem => item.DisasterVM.StartDate)  
             </td>
             <td>
-                @item.DisasterCount
+                @Html.DisplayFor(modelItem => item.DisasterVM.Description)  
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoodVM.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoodsPurchaseVM.purchaseAmount)
             </td>
         </tr>
     }

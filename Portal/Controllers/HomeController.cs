@@ -101,17 +101,31 @@ namespace Portal.Controllers
              * in each group, and stores the results in a 
              * collection of DisasterGroup view model objects.
              */
-            IQueryable<DisasterGroup> data =
-                from disaster in db.Disasters
-                group disaster by disaster.StartDate into
-                dateGroup
-                select new DisasterGroup()
-                {
-                    Active = DateTime.Today,
-                    ActiveDate = dateGroup.Key,
-                    DisasterCount = dateGroup.Count()
-                };
-            return View(await data.AsNoTracking().ToListAsync());
+            //IQueryable<DisasterGroup> data =
+            //    from disaster in db.Disasters
+            //    join goods in db.Goods
+            //    on disaster.DisasterID equals goods.DisasterID
+            //    group disaster by disaster.StartDate into
+            //    dateGroup
+            //    select new DisasterGroup()
+            //    {
+            //        Active = DateTime.Today,
+            //        ActiveDate = dateGroup.Key,
+            //        DisasterCount = dateGroup.Count()
+            //    };
+
+            var disasterViewModel = from disaster in db.Disasters
+                                   join goods in db.Goods on disaster.DisasterID equals goods.DisasterID into disasterGood
+                                   from goods in disasterGood.DefaultIfEmpty()   
+                                   
+                                   join category in db.Categories on goods.CategoryID equals category.CategoryID into categoryGood
+                                   from category in categoryGood.DefaultIfEmpty()
+
+                                   join goodspurchase in db.GoodsPurchases on disaster.DisasterID equals goodspurchase.DisasterId into disasterFund
+                                   from goodspurchase in disasterFund.DefaultIfEmpty()
+                                   select new DisasterGoodsInfo { DisasterVM = disaster, GoodVM = goods, CategoryVM = category, GoodsPurchaseVM = goodspurchase };
+
+            return View(await disasterViewModel.AsNoTracking().ToListAsync());
         }
 
 
