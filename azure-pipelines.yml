@@ -32,11 +32,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: Run Visual studio tests
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    command: 'test'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration debug'
