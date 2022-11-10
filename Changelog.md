@@ -17,3 +17,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Fixed
 - Restricted index page access based on feedback
 - All pages now require user to be logged in to be accessed
+
+### Added
+- Stats drop dropdown to navigate to the new features
+- Monetary stat page shows total funds and how many people funded on a certain day
+- Goods stats page shows total goods items and number of people donated on a certain day.
+- Disaster stats page show active disasters (Today) and a list with 
+- a description of disaster goods allocated as well as funds.
