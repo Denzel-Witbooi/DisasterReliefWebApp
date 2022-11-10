@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PortalTests
+namespace DisasterUnitTest
 {
     [TestClass]
-    public class AidTypesInitTests
+    public class AidTypesUnitTest
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -21,7 +21,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public AidTypesInitTests()
+        public AidTypesUnitTest()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -55,7 +55,7 @@ namespace PortalTests
                     Name = "Food"
                 };
 
-                context.AidTypes.AddRange(aidtypes, aidtypes2,aidtypes3);
+                context.AidTypes.AddRange(aidtypes, aidtypes2, aidtypes3);
                 context.SaveChanges();
             }
         }

@@ -3,17 +3,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portal.Data;
 using Portal.Models;
+using System.IO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PortalTests
+namespace DisasterUnitTest
 {
     [TestClass]
-    public class DisastersInitTests
+    public class CategoriesUnitTest
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -21,7 +21,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public DisastersInitTests()
+        public CategoriesUnitTest()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -40,16 +40,17 @@ namespace PortalTests
             {
                 context.Database.EnsureCreated();
 
-                var disaster = new Disaster()
+                var categories = new Category()
                 {
-                    AidTypeID = 1,
-                    StartDate = DateTime.Parse("2022-11-09"),
-                    EndDate = DateTime.Parse("2022-11-10"),
-                    Description = "Tsunami",
-                    Location = "PE"
+                    Name = "Clothes"
                 };
 
-                context.Disasters.AddRange(disaster);
+                var categories2 = new Category()
+                {
+                    Name = "Non‐perishable foods"
+                };
+
+                context.Categories.AddRange(categories, categories2);
                 context.SaveChanges();
             }
         }

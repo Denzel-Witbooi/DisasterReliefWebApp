@@ -3,18 +3,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portal.Data;
 using Portal.Models.Donation;
+using System.IO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PortalTests
+namespace DisasterUnitTest
 {
     [TestClass]
-    public class MonetaryInitTests
+    public class GoodsUnitTest
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -22,7 +21,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public MonetaryInitTests()
+        public GoodsUnitTest()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -41,21 +40,17 @@ namespace PortalTests
             {
                 context.Database.EnsureCreated();
 
-                var monetaries = new Monetary()
+                var goods = new Good()
                 {
-                    DonationDate = DateTime.Parse("2022-09-04"),
-                    DonationAmount = 350000,
-                    DonorName = "Nasrin2"
+                    CategoryID = 1,
+                    DisasterID = 1,
+                    DonationDate = DateTime.Parse("2022-01-08"),
+                    NumberOfItems = 8,
+                    Description = "Old shoes sizes > 10",
+                    DonorName = "Norman"
                 };
 
-                var monetaries2 = new Monetary()
-                {
-                    DonationDate = DateTime.Parse("2022-08-03"),
-                    DonationAmount = 450000,
-                    DonorName = "Stacey2"
-                };
-
-                context.Monetaries.AddRange(monetaries, monetaries2);
+                context.Goods.AddRange(goods);
                 context.SaveChanges();
             }
         }

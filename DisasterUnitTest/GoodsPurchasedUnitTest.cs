@@ -2,19 +2,18 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Portal.Data;
+using System.IO;
 using Portal.Models;
-using Portal.Models.Donation;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PortalTests
+namespace DisasterUnitTest
 {
     [TestClass]
-    public class GoodsInitTests
+    public class GoodsPurchasedInitTests
     {
         // to have the same Configuration object as in Startup
         private IConfigurationRoot _configuration;
@@ -22,7 +21,7 @@ namespace PortalTests
         // represents database's configuration
         private DbContextOptions<DisasterReliefContext> _options;
 
-        public GoodsInitTests()
+        public GoodsPurchasedInitTests()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -41,17 +40,15 @@ namespace PortalTests
             {
                 context.Database.EnsureCreated();
 
-                var goods = new Good()
+                var goodsPurchase = new GoodsPurchase()
                 {
-                    CategoryID = 1,
-                    DisasterID = 1,
-                    DonationDate = DateTime.Parse("2022-01-08"),
-                    NumberOfItems = 8,
-                    Description = "Old shoes sizes > 10",
-                    DonorName = "Norman"
+                    DisasterId = 1,
+                    MonetaryId = 1,
+                    Description = "lorem 2",
+                    purchaseAmount = 10000
                 };
 
-                context.Goods.AddRange(goods);
+                context.GoodsPurchases.AddRange(goodsPurchase);
                 context.SaveChanges();
             }
         }
