@@ -1,21 +1,23 @@
-﻿@model IEnumerable<Portal.Models.ReliefViewModels.DonationGroup>
+﻿@model IEnumerable<Portal.Models.ReliefViewModels.MonetaryGroup>
 
 @{
     ViewBag.Title = "Disaster Relief Statistics";
 }
 
-<h2>Disaster Relief Statistics</h2>
+<h1>Disaster Relief Statistics - Monetary Donations</h1>
+<h3>Total Funds: @ViewBag.totalDonation</h3>
 
-<table>
+<table class="table">
+    <thead>
     <tr>
         <th>
             Donated Date
         </th>
         <th>
-            Goods
+            Amount of Donators
         </th>
     </tr>
-
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -23,8 +25,9 @@
                 @Html.DisplayFor(modelItem => item.DonationDate)
             </td>
             <td>
-                @item.GoodsCount
+                @item.MonetaryCount
             </td>
         </tr>
     }
+
 </table>

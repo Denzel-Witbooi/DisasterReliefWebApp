@@ -69,14 +69,11 @@ namespace Portal.Data
 
             #region Disaster 
             var disasters = new Disaster[]
-   {
-                new Disaster{AidTypeID = 1, StartDate=DateTime.Parse("2022-01-01"), EndDate=DateTime.Parse("2022-01-12"),
-                        Description="Explosion of buried nuclear waste from a plutonium-processing plant near Kyshtym",
-                        Location=" Chelyabinsk, Russia, Soviet Union" },
-                new Disaster{AidTypeID = 2, StartDate=DateTime.Parse("2022-10-01"), EndDate=DateTime.Parse("2022-10-10"),
-                        Description="The capsizing of an Italian cruise ship on January 13, 2012, after it struck rocks off the coast of Giglio Island in the Tyrrhenian Sea.",
-                        Location="Giglio Island, Italy, Mediterranean Sea Tyrrhenian Sea"}
-   };
+             {
+                new Disaster{AidTypeID = 1, StartDate=DateTime.Parse("2022-11-09"), EndDate=DateTime.Parse("2022-11-10"),
+                        Description="Tsunami",
+                        Location="Eastern Cape" }
+            };
 
             foreach (Disaster disaster in disasters)
             {

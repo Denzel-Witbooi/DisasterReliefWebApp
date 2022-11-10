@@ -6,6 +6,13 @@ namespace Portal.Data
 {
     public class DisasterReliefContext : DbContext
     {
+        // DB connection properties injected automatically
+        public DisasterReliefContext()
+        {
+
+        }
+
+        // DB connection properties given explicitly (for Unit Tests)
         public DisasterReliefContext(DbContextOptions<DisasterReliefContext> options) : base(options)
         {
         }

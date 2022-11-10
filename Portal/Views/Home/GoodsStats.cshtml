@@ -4,9 +4,11 @@
     ViewBag.Title = "Disaster Relief Statistics";
 }
 
-<h2>Disaster Relief Statistics</h2>
+<h1>Disaster Relief Statistics - Goods Donated</h1>
+<h3>Total item goods: @ViewBag.getTotalGoods</h3>
 
-<table>
+<table class="table">
+   <thead>
     <tr>
         <th>
             Donated Date
@@ -15,7 +17,7 @@
             Goods
         </th>
     </tr>
-
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
