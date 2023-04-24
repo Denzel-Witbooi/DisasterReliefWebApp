@@ -9,8 +9,6 @@ https://youtu.be/nUPYDKHNbQI
 ```
 ### Azure Auth:
 ```
-User: ST10118615
-Password: mPahMWD3gpC7*RC1IFC1
 ```
 ## ERD
 Simple ERD to map out my model structure and relationships
@@ -33,6 +31,5 @@ https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6
 ### ERD made with draw.io 
 
 ### Azure Access
-![azure](https://user-images.githubusercontent.com/77748858/190170262-71d15e70-d819-4e7d-8445-369203a5e356.png)
 
 
