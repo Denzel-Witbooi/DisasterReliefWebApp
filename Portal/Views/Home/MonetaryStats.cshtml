@@ -4,30 +4,82 @@
     ViewBag.Title = "Disaster Relief Statistics";
 }
 
-<h1>Disaster Relief Statistics - Monetary Donations</h1>
-<h3>Total Funds: @ViewBag.totalDonation</h3>
+<div style="background:#ffc947 !important" class="jumbotron">
+    <h1 align="center">Monetary Donations</h1>
+</div>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            Donated Date
-        </th>
-        <th>
-            Amount of Donators
-        </th>
-    </tr>
-    </thead>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonationDate)
-            </td>
-            <td>
-                @item.MonetaryCount
-            </td>
-        </tr>
+<div class="container">
+    <div class="card card-total text-center">
+        <h3>Total Funds</h3>
+        <p class="total-amount">@ViewBag.totalDonation</p>
+    </div>
+
+    <table class="table-modern">
+        <thead>
+            <tr>
+                <th>Donated Date</th>
+                <th>Amount of Donators</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.DonationDate)</td>
+                    <td>@item.MonetaryCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .jumbotron {
+        background: #ffc947 !important;
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: .3rem;
     }
 
-</table>
+    .card-total {
+        background-color: #9c27b0;
+        color: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: .3rem;
+    }
+
+    .total-amount {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #ffc947; /* Yellow */
+        background-color: #4a148c; /* Dark Purple */
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+
+    .table-modern {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+    }
+
+        .table-modern th, .table-modern td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .table-modern th {
+            background-color: #f2f2f2;
+        }
+
+        .table-modern tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table-modern tr:hover {
+            background-color: #f1f1f1;
+        }
+</style>
